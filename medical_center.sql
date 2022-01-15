@@ -22,37 +22,22 @@ CREATE TABLE patients (
 
 CREATE TABLE doctors_patients (
     id SERIAL PRIMARY KEY,
-    doctors_id INTEGER NOT NULL,
-    patients_id INTEGER NOT NULL
+    doctors_id Integer NOT NULL REFERENCES doctors(id),
+    patients_id Integer NOT NULL REFERENCES patients(id),
 );
 
 
-INSERT INTO doctors (first_name, last_name, specialties)
- VALUES
- ('John', 'Smith', 'Internal Medicine'),
- ('Lisa', 'Rose', 'Emegency Medicine'),
- ('Ali', 'Hussain', 'Dermetalogy'),
- ('Shiba', 'Khan', 'Family Medicine');
+CREATE TABLE deceases (
+id Integer PRIMARY KEY,
+deceases TEXT NOT NULL,
+patients_id Integer NOT NULL REFERENCES patients(id),
+);
 
 
-INSERT INTO patients (first_name, last_name, age, deseases)
- VALUES
- ('Lina', 'Edward', 55, 'sun burn'),
- ('Katrina', 'John', 30, 'Influenza'),
- ('Leela', 'Logan', 22, 'kidney failure'),
- ('Hamid', 'Ali', 44, 'sore throat');
+CREATE TABLE visits (
+id Integer PRIMARY KEY,
+visit_date datetime NOT NULL,
+patients_id Integer NOT NULL REFERENCES patients(id),
+doctors_id Integer NOT NULL REFERENCES doctors(id),
+);
 
-
- INSERT INTO doctors_patients (doctors_id, patients_id)
- VALUES
- (1, 2),
- (2, 3),
- (3, 1),
- (4, 4),
- (1, 4),
- (4, 2),
- (2, 2);
-
-
- 
- 
